@@ -1,14 +1,13 @@
 FROM python:3.9-bullseye
 
 # Working Directory
-WORKDIR /app
 
-# Copy source code to working directory
-COPY . main.py /app/
-
-COPY ./requirements.txt /app/requirements.txt
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
 
 RUN pip install --no-cache-dir --upgrade pip &&\
-    pip install --no-cache-dir --trusted-host pypi.python.org -r /app/requirements.txt
+    pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+
+CMD exec gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker  --threads 8 app.main:app
