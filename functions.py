@@ -3,6 +3,7 @@ import numpy as np
 from datetime import datetime
 import pickle
 from pathlib import Path
+#prueba
 
 
 def temporada_alta(fecha):
