@@ -10,3 +10,7 @@ pyyaml==6.0
 mockito==1.4.0
 pycodestyle
 gunicorn
+azure-functions
+pytest
+httpx
+trio
