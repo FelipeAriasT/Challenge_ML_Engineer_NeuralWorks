@@ -4,7 +4,7 @@ data_name: dataset_SCL.csv
 target_name: atraso_15
 test_size: 0.33
 model_directory: models/
-model_name: model_2.pkl
+model_name: model_xgb.pkl
 features_name: ['OPERA_Aerolineas Argentinas', 'OPERA_Aeromexico',
        'OPERA_Air Canada', 'OPERA_Air France', 'OPERA_Alitalia',
        'OPERA_American Airlines', 'OPERA_Austral', 'OPERA_Avianca',

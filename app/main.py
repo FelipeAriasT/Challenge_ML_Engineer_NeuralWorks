@@ -9,17 +9,13 @@ from pydantic import BaseModel
 import uvicorn
 
 
-# importamos la configuracion general
 with open('config/config.yaml') as file:
     config = yaml.safe_load(file)
 
 
-# cargamos el modelo seleccionado
 model = pickle.load(
     open(f"{config['model_directory']}{config['model_name']}", "rb"))
 features_name = config['features_name']
-
-# hacer de manera mas general con features_in?
 
 
 class Vuelo(BaseModel):
@@ -61,7 +57,6 @@ class Vuelo(BaseModel):
     MES_11: bool
     MES_12: bool
 
-
 class ListaVuelos(BaseModel):
     vuelos: List[Vuelo]
 
@@ -77,9 +72,6 @@ async def root():
 @app.post("/predict", response_model=List)
 async def predict_post(data: ListaVuelos):
 
-    # data=json.loads(data)
-    # re-estructurar datos de la lista de vuelos para que funcione el modelo
-    # elegido
     df_api = pd.DataFrame(jsonable_encoder(data.vuelos))
     df_api.columns = features_name
     pred = list(model.predict(df_api))
