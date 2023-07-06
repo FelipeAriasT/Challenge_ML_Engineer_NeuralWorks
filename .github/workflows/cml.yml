@@ -26,7 +26,7 @@ jobs:
       run: |
         make check
 
-    - name: Start API server in GCP
+    - name: Start API server in GCP (optional and not working yet due to GCP auth)
       run: |
         #make deploy
         
