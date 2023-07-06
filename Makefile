@@ -9,7 +9,7 @@ format:
 	autopep8 --in-place --aggressive --aggressive *.py
 
 lint:
-	pylint --disable=R,C,W1203,E1101 #poner aca nombre de las carpeta
+	pylint --disable=R,C,W1203,E1101 --extension-pkg-whitelist='pydantic' *.py
 
 deploy:
 	#push to GCP container registry

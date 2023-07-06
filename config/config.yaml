@@ -1,7 +1,6 @@
 #Settings iniciales
 data_directory: data/
 data_name: dataset_SCL.csv
-drop_columns: ["id"]
 target_name: atraso_15
 test_size: 0.33
 model_directory: models/
@@ -18,5 +17,4 @@ features_name: ['OPERA_Aerolineas Argentinas', 'OPERA_Aeromexico',
        'TIPOVUELO_N', 'MES_1', 'MES_2', 'MES_3', 'MES_4', 'MES_5',
        'MES_6', 'MES_7', 'MES_8', 'MES_9', 'MES_10', 'MES_11', 'MES_12']
 
-#configuracion modelo
 

@@ -1,50 +1,56 @@
-from functions import *
 from datetime import datetime
 import pandas as pd
+from utils import temporada_alta, calcular_tasa, dif_minutes, get_periodo_dia
 
 
 def test_temporada_alta():
-    # Caso de prueba: fecha dentro de la temporada alta
+    """Function that tests the function temporada_alta. 5 test cases are used:
+    - date within the high season
+    - date outside the high season
+    - date on the lower limit of the high season
+    - date on the upper limit of the high season
+    - date on the upper limit of the high season (last day of February)
+    """
     fecha = '2022-12-20 12:00:00'
     resultado = temporada_alta(fecha)
     assert resultado == 1
 
-    # Caso de prueba: fecha fuera de la temporada alta
     fecha = '2022-06-01 09:00:00'
     resultado = temporada_alta(fecha)
     assert resultado == 0
 
-    # Caso de prueba: fecha en el límite inferior de la temporada alta
     fecha = '2022-12-15 00:00:00'
     resultado = temporada_alta(fecha)
     assert resultado == 1
 
-    # Caso de prueba: fecha en el límite superior de la temporada alta
     fecha = '2022-09-30 23:59:59'
     resultado = temporada_alta(fecha)
     assert resultado == 0
 
-    # Caso de prueba: fecha en el límite superior de la temporada alta (último día de febrero)
     fecha = '2022-03-03 12:00:00'
     resultado = temporada_alta(fecha)
     assert resultado == 0
 
-
 def test_calcular_tasa():
-    # Datos de prueba
+    """Function that tests the function calcular_tasa. The test case uses a dataframe with 6 rows and 2 columns:
+    - column 'columna' with 3 different values: A, B and C
+    - column 'atraso_15' with 1s and 0s
+
+    The expected result is a dataframe with 3 rows and 1 column:
+    - column 'Tasa (%)' with the rate for each value of the column 'columna'
+    - compare two dataframes using the function pd.testing.assert_frame_equal
+    """
+   
     df = pd.DataFrame({
         'columna': ['A', 'A', 'B', 'B', 'B', 'C'],
         'atraso_15': [1, 1, 1, 0, 0, 1]
     })
 
-    # Calcular la tasa para la columna 'columna'
     resultado = calcular_tasa(df, 'columna')
 
-    # Verificar el tipo y tamaño del resultado
     assert isinstance(resultado, pd.DataFrame)
     assert resultado.shape == (3, 1)
 
-    # Verificar los valores de la tasa calculada
     resultado = resultado.sort_index()
     expected_result = pd.DataFrame({
         'Tasa (%)': [100.0,33.0, 100.0]
@@ -52,53 +58,58 @@ def test_calcular_tasa():
 
     pd.testing.assert_frame_equal(resultado, expected_result)
 
-def test_dif_min():
-    # Datos de prueba
+def test_dif_minutes():
+    """Function that tests the function dif_minutes. The test case uses a dictionary with two keys:
+    - 'Fecha-O' with a date in the format 'YYYY-MM-DD HH:MM:SS' (string)
+    - 'Fecha-I' with a date in the format 'YYYY-MM-DD HH:MM:SS' (string)
+
+    The expected result is the difference in minutes between the two dates.
+    """
+
     data = {
         'Fecha-O': '2022-01-01 12:00:00',
         'Fecha-I': '2022-01-01 10:30:00'
     }
 
-    # Calcular la diferencia en minutos
-    resultado = dif_min(data)
+    resultado = dif_minutes(data)
 
-    # Verificar el resultado esperado
     assert resultado == 90
 
-    # Caso de prueba con fechas iguales
     data = {
         'Fecha-O': '2022-01-01 12:00:00',
         'Fecha-I': '2022-01-01 12:00:00'
     }
 
-    resultado = dif_min(data)
+    resultado = dif_minutes(data)
 
-    # Verificar que la diferencia sea cero
     assert resultado == 0
 
-
 def test_get_periodo_dia():
-    # Caso de prueba: fecha en el período de la mañana
+    """Function that tests the function get_periodo_dia. 6 test cases are used:
+    - date within the morning period
+    - date within the afternoon period
+    - date within the night period
+    - date on the lower limit of the night period
+    - date on the upper limit of the night period
+    - date on the upper limit of the night period (last day of February)
+    """
+
     fecha = '2022-01-01 08:30:00'
     resultado = get_periodo_dia(fecha)
     assert resultado == 'mañana'
 
-    # Caso de prueba: fecha en el período de la tarde
     fecha = '2022-01-01 14:45:00'
     resultado = get_periodo_dia(fecha)
     assert resultado == 'tarde'
 
-    # Caso de prueba: fecha en el período de la noche
     fecha = '2022-01-01 21:00:00'
     resultado = get_periodo_dia(fecha)
     assert resultado == 'noche'
 
-    # Caso de prueba: fecha en el límite inferior del período de la noche
     fecha = '2022-01-01 00:00:00'
     resultado = get_periodo_dia(fecha)
     assert resultado == 'noche'
 
-    # Caso de prueba: fecha en el límite superior del período de la noche
     fecha = '2022-01-01 04:59:59'
     resultado = get_periodo_dia(fecha)
     assert resultado == 'noche'

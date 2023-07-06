@@ -1,12 +1,13 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.encoders import jsonable_encoder
-import uvicorn
 import pickle
-from pydantic import BaseModel
 from typing import List
+
 import pandas as pd
-import json
 import yaml
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
+import uvicorn
+
 
 # importamos la configuracion general
 with open('config/config.yaml') as file:
@@ -17,6 +18,9 @@ with open('config/config.yaml') as file:
 model = pickle.load(
     open(f"{config['model_directory']}{config['model_name']}", "rb"))
 features_name = config['features_name']
+
+# hacer de manera mas general con features_in?
+
 
 class Vuelo(BaseModel):
     OPERA_Aerolineas_Argentinas: bool
@@ -56,6 +60,7 @@ class Vuelo(BaseModel):
     MES_10: bool
     MES_11: bool
     MES_12: bool
+
 
 class ListaVuelos(BaseModel):
     vuelos: List[Vuelo]
