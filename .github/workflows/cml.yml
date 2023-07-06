@@ -28,4 +28,4 @@ jobs:
 
     - name: Start API server
       run: |
-        uvicorn app.main:app --reload   
+        timeout -s SIGINT 10s uvicorn app.main:app --reload   
