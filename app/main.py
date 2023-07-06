@@ -18,9 +18,6 @@ model = pickle.load(
     open(f"{config['model_directory']}{config['model_name']}", "rb"))
 features_name = config['features_name']
 
-# hacer de manera mas general con features_in?
-
-
 class Vuelo(BaseModel):
     OPERA_Aerolineas_Argentinas: bool
     OPERA_Aeromexico: bool
@@ -59,7 +56,6 @@ class Vuelo(BaseModel):
     MES_10: bool
     MES_11: bool
     MES_12: bool
-
 
 class ListaVuelos(BaseModel):
     vuelos: List[Vuelo]
