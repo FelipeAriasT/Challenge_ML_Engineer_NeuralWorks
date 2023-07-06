@@ -28,4 +28,5 @@ jobs:
 
     - name: Start API server
       run: |
-        timeout -s SIGINT 10s uvicorn app.main:app --reload   
+        make deploy
+        
