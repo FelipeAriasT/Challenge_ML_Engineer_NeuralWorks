@@ -17,6 +17,97 @@ Posterior a este proceso, con la imagen ya cargada en Container Registry de GCP,
 
 ![Logo de GitHub](images/API_GCP.png)
 
+Para hacer consultas a la API, ocupar el siguiente formato cURL
+```
+curl --location 'https://api-od26sbu7kq-uc.a.run.app/predict' \
+--header 'Content-Type: application/json' \
+--data '{
+    "vuelos": [
+        {
+            "OPERA_Aerolineas_Argentinas": true,
+            "OPERA_Aeromexico": false,
+            "OPERA_Air_Canada": true,
+            "OPERA_Air_France": false,
+            "OPERA_Alitalia": true,
+            "OPERA_American_Airlines": false,
+            "OPERA_Austral": true,
+            "OPERA_Avianca": false,
+            "OPERA_British_Airways": true,
+            "OPERA_Copa_Air": false,
+            "OPERA_Delta_Air": true,
+            "OPERA_Gol_Trans": false,
+            "OPERA_Grupo_LATAM": true,
+            "OPERA_Iberia": false,
+            "OPERA_JetSmart_SPA": true,
+            "OPERA_K_L_M": false,
+            "OPERA_Lacsa": true,
+            "OPERA_Latin_American_Wings": false,
+            "OPERA_Oceanair_Linhas_Aereas": true,
+            "OPERA_Plus_Ultra_Lineas_Aereas": false,
+            "OPERA_Qantas_Airways": true,
+            "OPERA_Sky_Airline": false,
+            "OPERA_United_Airlines": true,
+            "TIPOVUELO_I": false,
+            "TIPOVUELO_N": true,
+            "MES_1": false,
+            "MES_2": true,
+            "MES_3": false,
+            "MES_4": true,
+            "MES_5": false,
+            "MES_6": true,
+            "MES_7": false,
+            "MES_8": true,
+            "MES_9": false,
+            "MES_10": true,
+            "MES_11": false,
+            "MES_12": true
+        },
+        {
+            "OPERA_Aerolineas_Argentinas": false,
+            "OPERA_Aeromexico": true,
+            "OPERA_Air_Canada": false,
+            "OPERA_Air_France": true,
+            "OPERA_Alitalia": false,
+            "OPERA_American_Airlines": true,
+            "OPERA_Austral": false,
+            "OPERA_Avianca": true,
+            "OPERA_British_Airways": false,
+            "OPERA_Copa_Air": true,
+            "OPERA_Delta_Air": false,
+            "OPERA_Gol_Trans": true,
+            "OPERA_Grupo_LATAM": false,
+            "OPERA_Iberia": true,
+            "OPERA_JetSmart_SPA": false,
+            "OPERA_K_L_M": true,
+            "OPERA_Lacsa": false,
+            "OPERA_Latin_American_Wings": true,
+            "OPERA_Oceanair_Linhas_Aereas": false,
+            "OPERA_Plus_Ultra_Lineas_Aereas": false,
+            "OPERA_Qantas_Airways": false,
+            "OPERA_Sky_Airline": true,
+            "OPERA_United_Airlines": false,
+            "TIPOVUELO_I": true,
+            "TIPOVUELO_N": false,
+            "MES_1": true,
+            "MES_2": false,
+            "MES_3": true,
+            "MES_4": false,
+            "MES_5": true,
+            "MES_6": false,
+            "MES_7": true,
+            "MES_8": false,
+            "MES_9": true,
+            "MES_10": false,
+            "MES_11": true,
+            "MES_12": false
+        }
+    ]
+}
+'
+```
+
+Tambien se realizaron pruebas de stress con wkr
+
 Organización del repositorio.
 ------------
     │── .github/workflows                   <- Continous integration
