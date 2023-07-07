@@ -1,7 +1,7 @@
 [![CI API](https://github.com/FelipeAriasT/Challenge_ML_Engineer_NeuralWorks/actions/workflows/cml.yml/badge.svg)](https://github.com/FelipeAriasT/Challenge_ML_Engineer_NeuralWorks/actions/workflows/cml.yml)
 
 # Challenge ML Engineer NeuralWorks
-===================================
+
 
 Este repositorio contiene la resolución del desafío Machine Learning Engineer de NeuralWorks. Este repositorio contiene los archivos jupyter notebook to-expose.ipynb donde se explica la elección del mejor modelo desarrollado por Juan mientras que to-expose_improve.ipynb busca los mejores resultados a el modelo escogido.
 
