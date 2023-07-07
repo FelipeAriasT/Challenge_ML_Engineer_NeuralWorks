@@ -106,7 +106,36 @@ curl --location 'https://api-od26sbu7kq-uc.a.run.app/predict' \
 '
 ```
 
-Tambien se realizaron pruebas de stress con wkr
+Tambien se realizaron pruebas de stress con wkr, mediante la siguiente solicitud 
+
+```
+wrk -t10 -c50 -d45s -s test/test.lua https://api-od26sbu7kq-uc.a.run.app/predict
+```
+
+Con los siguientes resultados
+
+```
+Running 45s test @ https://api-od26sbu7kq-uc.a.run.app/predict
+  10 threads and 50 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   286.85ms   48.83ms   1.73s    76.93%
+    Req/Sec    17.11      7.76    40.00     64.78%
+  7584 requests in 45.08s, 1.80MB read
+  Socket errors: connect 0, read 0, write 0, timeout 13
+Requests/sec:    168.22
+Transfer/sec:     40.90KB
+
+```
+Donde se destacan resultados como 
+* Req/Sec: Muestra la cantidad promedio de solicitudes por segundo que se pudieron procesar. El promedio fue de 17.11 solicitudes por segundo, con una desviación estándar de 7.76. El valor máximo registrado fue de 40.00 solicitudes por segundo.
+  
+* 7584 requests in 45.08s, 1.80MB read: Indica que se realizaron un total de 7584 solicitudes durante los 45.08 segundos de la prueba. Se leyeron 1.80 MB de datos en total.
+
+* Socket errors: connect 0, read 0, write 0, timeout 13: Muestra la cantidad de errores de socket encontrados durante la prueba. En este caso, no se encontraron errores de conexión, lectura o escritura, pero se registraron 13 errores de tiempo de espera (timeout).
+
+* Requests/sec: 168.22: Indica la cantidad de solicitudes por segundo promedio procesadas durante la prueba. En este caso, se procesaron en promedio 168.22 solicitudes por segundo.
+
+Estos resultados se podrian mejorar considerando en primera instancia el aumento del número de hilos y conexiones. Tambien otras consideraciones como separar la carga del modelo en la API con un modulo aparte como load_model.py y que el archivo main.py para aprovechar el caché. Por ultimo considerar la optimización los parametros de servidor de GCP como balanceadores de carga o el autoscaling.
 
 Organización del repositorio.
 ------------
@@ -120,6 +149,8 @@ Organización del repositorio.
     |
     ├── config                              <- Carpeta que almacena las configuraciones.
     │
+    ├── images                              <- Carpeta que almacena las imagenes del repositorio.
+    |
     ├── models                              <- Carpeta que almacena los modelos entrenados.
     │
     ├── test                                <- Carpeta con archivos para testear las funciones creadas y test de stress.
