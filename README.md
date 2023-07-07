@@ -15,7 +15,7 @@ gcloud builds submit --tag gcr.io/neuralworks-391916/api  # mandamos la imagen a
 ```
 Posterior a este proceso, con la imagen ya cargada en Container Registry de GCP, se realiza el despliegue en Cloud Run de GCP y se realiza continuous delivery integrando este repositorio a la API con activadores de Cloud Build.
 
-
+![Logo de GitHub](images/API_GCP.png)
 
 Organización del repositorio.
 ------------
